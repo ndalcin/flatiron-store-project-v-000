@@ -17,6 +17,7 @@ describe 'Feature Test: Category', :type => :feature do
       end
     end
 
+
     context "not logged in" do
 
       it 'does not display "Add To Cart" button' do
