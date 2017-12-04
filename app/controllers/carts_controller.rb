@@ -1,27 +1,14 @@
 class CartsController < ApplicationController
 
-
-  def new
-  end
-
-  def create
-  end
-
-  def show
-
-    @cart = current_user.current_cart
-    binding.pry
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
   def checkout
+    current_cart.line_items.each do |li|
+      item = Item.find(li.item_id)
+      bought = li.quantity
+      inventory = item.inventory
+      item.update(inventory: (inventory - bought))
+    end
+    current_cart.destroy
+    redirect_to cart_path(current_cart)
   end
+
 end
